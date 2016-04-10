@@ -206,6 +206,101 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/10/事件冒泡/" itemprop="url">
+                  未命名
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-10T16:07:52+08:00" content="2016-04-10">
+              2016-04-10
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>title: 理解事件冒泡</p>
+<h2 id="date-2016-03-20"><a href="#date-2016-03-20" class="headerlink" title="date: 2016-03-20"></a>date: 2016-03-20</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>今天遇到一个很愚蠢的问题，写一个点击某个按钮显示弹窗，然后在页面点击弹窗以外区域隐藏的事件，发现写完后弹窗显示又马上隐藏了，当时百思不得其解，明明没有出发隐藏事件阿！想了一大通，发现原来是事件冒泡导致点击事件显示弹窗后，事件冒泡到document又触发了隐藏事件。<br>弱智代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">popDialog: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">				<span class="keyword">var</span> $dialog = $(<span class="keyword">this</span>).parents(<span class="string">'.td4'</span>).find(<span class="string">'.dialog-all'</span>);</span><br><span class="line">				<span class="keyword">var</span> $dialogPop = $dialog.children(<span class="string">'.dialog-pop'</span>);</span><br><span class="line">				<span class="keyword">var</span> $partsname = $(<span class="keyword">this</span>).parents(<span class="string">'.tr-list'</span>).find(<span class="string">'.parts-name'</span>);</span><br><span class="line">				$(<span class="string">'.dialog-pop'</span>).html(<span class="string">""</span>);</span><br><span class="line">		</span><br><span class="line">				$.ajax(&#123;...&#125;)</span><br><span class="line">				<span class="comment">//弹窗隐藏，否则显示</span></span><br><span class="line">				<span class="keyword">if</span>($dialog.is(<span class="string">':hidden'</span>))&#123;</span><br><span class="line">					$dialog.show();</span><br><span class="line">				&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">					$dialog.hide();</span><br><span class="line">				&#125;</span><br><span class="line">				</span><br><span class="line">				$(<span class="built_in">document</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">					e.stopPropagation();</span><br><span class="line">					<span class="keyword">var</span> _dialog = $dialog;</span><br><span class="line">					<span class="keyword">if</span>(!_dialog.is(e.target) &amp;&amp; (_dialog.has(e.target).length === <span class="number">0</span>))&#123;</span><br><span class="line">						_dialog.hide();</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;);</span><br><span class="line">			&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="什么是事件冒泡"><a href="#什么是事件冒泡" class="headerlink" title="什么是事件冒泡"></a>什么是事件冒泡</h3><p>页面中有个叫事件流的机制，事件流又分为事件冒泡和事件捕获两个阶段；<br>事件冒泡：事件开始由最具体的元素接收，然后逐级向上传播较为不具体的节点。如图：<br><img src="http://7xnjm0.com1.z0.glb.clouddn.com/sadfasg.png" alt=""><br>如果我点击了页面中的<code>&lt;div&gt;</code>元素，那么这个<code>click</code> 事件会按照<code>div</code>、<code>body</code>、<code>html</code>、<code>document</code> 这个顺序传播下去，也就是说事件会沿DOM树向上传播。<br>事件捕获的顺序刚好相反，外层的元素会比内层的元素更早接收到事件，然后逐级向里传播，直到目标元素。</p>
+<h3 id="阻止冒泡"><a href="#阻止冒泡" class="headerlink" title="阻止冒泡"></a>阻止冒泡</h3><p>因为这个问题是因为冒泡导致，如果不想让事件向上冒泡，那么就可以在点击事件触发后阻止其冒泡行为。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">popDialog: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">	e.stopPropagation();</span><br><span class="line">	......;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样问题就解决了。</p>
+<h3 id="阻止浏览器默认行为"><a href="#阻止浏览器默认行为" class="headerlink" title="阻止浏览器默认行为"></a>阻止浏览器默认行为</h3><p>同样的，当一些事件会触发浏览器的行为时（如表单提交、键盘按键），而我们又不想让这些事件发生。 可以用<code>preventDefault</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">	e.preventDefault();</span><br><span class="line">	......;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/29/javascript判断变量存在/" itemprop="url">
                   Javascript判断变量存在的问题
                 </a>
@@ -875,7 +970,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
