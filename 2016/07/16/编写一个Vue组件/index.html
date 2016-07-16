@@ -57,16 +57,19 @@
 
 
 
-<meta name="description" content="报错了之前写了一段代码，判断某个变量是否声明了，如果存在，则去做某一些事情，然后这段代码报错了。一时间没想起来if 语句是否能判断变量有没有被声明，因为之前判断变量是否为空时也是这么写的，查了资料之后才发现是不能这么写的。1234if(getCLodop)&amp;#123;                LODOP = getCLodop();                LODOP.SET_LICE">
+<meta name="description" content="前言最近在开发的项目（一个给汽配供应商使用的erp系统）中用上了Vue，在这学习并使用的过程中，组件的概念已经深入脑海，因为项目本身的某些需求比较特殊，样式也是特定的，加上基于Vue的ui库本身就很少，因此项目中用到的组件都是自己写的，一边参考别人是怎么写组件的，然后实现适用于自己项目的组件。组件的基本格式可以参考Vue的官方文档。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Javascript判断变量存在的问题">
-<meta property="og:url" content="http://yoursite.com/2016/03/29/javascript判断变量存在/index.html">
+<meta property="og:title" content="编写一个Vue组件">
+<meta property="og:url" content="http://yoursite.com/2016/07/16/编写一个Vue组件/index.html">
 <meta property="og:site_name" content="风畔的木桩区">
-<meta property="og:description" content="报错了之前写了一段代码，判断某个变量是否声明了，如果存在，则去做某一些事情，然后这段代码报错了。一时间没想起来if 语句是否能判断变量有没有被声明，因为之前判断变量是否为空时也是这么写的，查了资料之后才发现是不能这么写的。1234if(getCLodop)&amp;#123;                LODOP = getCLodop();                LODOP.SET_LICE">
-<meta property="og:updated_time" content="2016-04-09T09:25:03.996Z">
+<meta property="og:description" content="前言最近在开发的项目（一个给汽配供应商使用的erp系统）中用上了Vue，在这学习并使用的过程中，组件的概念已经深入脑海，因为项目本身的某些需求比较特殊，样式也是特定的，加上基于Vue的ui库本身就很少，因此项目中用到的组件都是自己写的，一边参考别人是怎么写组件的，然后实现适用于自己项目的组件。组件的基本格式可以参考Vue的官方文档。">
+<meta property="og:image" content="https://lh3.googleusercontent.com/--tu6KCzlG4w/V4oZIOon_lI/AAAAAAAAAAM/OlaqIHFYHGc6vqnrIzwKJh-TBjiMoydxQCLcB/s0/toast.gif">
+<meta property="og:image" content="http://7xnjm0.com1.z0.glb.clouddn.com/toast-bug.gif">
+<meta property="og:updated_time" content="2016-07-16T12:56:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Javascript判断变量存在的问题">
-<meta name="twitter:description" content="报错了之前写了一段代码，判断某个变量是否声明了，如果存在，则去做某一些事情，然后这段代码报错了。一时间没想起来if 语句是否能判断变量有没有被声明，因为之前判断变量是否为空时也是这么写的，查了资料之后才发现是不能这么写的。1234if(getCLodop)&amp;#123;                LODOP = getCLodop();                LODOP.SET_LICE">
+<meta name="twitter:title" content="编写一个Vue组件">
+<meta name="twitter:description" content="前言最近在开发的项目（一个给汽配供应商使用的erp系统）中用上了Vue，在这学习并使用的过程中，组件的概念已经深入脑海，因为项目本身的某些需求比较特殊，样式也是特定的，加上基于Vue的ui库本身就很少，因此项目中用到的组件都是自己写的，一边参考别人是怎么写组件的，然后实现适用于自己项目的组件。组件的基本格式可以参考Vue的官方文档。">
+<meta name="twitter:image" content="https://lh3.googleusercontent.com/--tu6KCzlG4w/V4oZIOon_lI/AAAAAAAAAAM/OlaqIHFYHGc6vqnrIzwKJh-TBjiMoydxQCLcB/s0/toast.gif">
 
 
 
@@ -84,7 +87,7 @@
   };
 </script>
 
-  <title> Javascript判断变量存在的问题 | 风畔的木桩区 </title>
+  <title> 编写一个Vue组件 | 风畔的木桩区 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -204,7 +207,7 @@
             
             
               
-                Javascript判断变量存在的问题
+                编写一个Vue组件
               
             
           </h1>
@@ -216,8 +219,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-29T00:00:00+08:00" content="2016-03-29">
-              2016-03-29
+            <time itemprop="dateCreated" datetime="2016-07-16T00:00:00+08:00" content="2016-07-16">
+              2016-07-16
             </time>
           </span>
 
@@ -243,13 +246,17 @@
       
 
       
-        <h3 id="报错了"><a href="#报错了" class="headerlink" title="报错了"></a>报错了</h3><p>之前写了一段代码，判断某个变量是否声明了，如果存在，则去做某一些事情，然后这段代码报错了。一时间没想起来<code>if</code> 语句是否能判断变量有没有被声明，因为之前判断变量是否为空时也是这么写的，查了资料之后才发现是不能这么写的。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(getCLodop)&#123;</span><br><span class="line">                LODOP = getCLodop();</span><br><span class="line">                LODOP.SET_LICENSES(<span class="string">""</span>,<span class="string">""</span>,<span class="string">""</span>,<span class="string">""</span>);</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="正确的写法"><a href="#正确的写法" class="headerlink" title="正确的写法"></a>正确的写法</h3><h4 id="写法一"><a href="#写法一" class="headerlink" title="写法一"></a>写法一</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(typeof a === &apos;undefined&apos;)&#123;</span><br><span class="line">	doSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>typeof</code> 对未声明的变量会返回 <code>&#39;undefined&#39;</code></p>
-<h4 id="写法二"><a href="#写法二" class="headerlink" title="写法二"></a>写法二</h4><p>假设我们在浏览器端，那么可以这么写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(window.a)&#123;</span><br><span class="line">	doSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="写法三"><a href="#写法三" class="headerlink" title="写法三"></a>写法三</h4><p>根据写法二，可以变一下形式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(a in window)&#123;</span><br><span class="line">	doSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="写法四"><a href="#写法四" class="headerlink" title="写法四"></a>写法四</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(a)&#123;</span><br><span class="line">	var a = xxx;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这段代码不会报错，原因是Javascript的变量声明提升。<br>上面几种应该是是最常用的写法了，查了下资料发现还有非常多种的写法，参考阮一峰老师的文章<a href="http://www.ruanyifeng.com/blog/2011/05/how_to_judge_the_existence_of_a_global_object_in_javascript.html" target="_blank" rel="external">如何判断Javascript对象是否存在</a></p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在开发的项目（一个给汽配供应商使用的erp系统）中用上了Vue，在这学习并使用的过程中，<strong>组件</strong>的概念已经深入脑海，因为项目本身的某些需求比较特殊，样式也是特定的，加上基于Vue的ui库本身就很少，因此项目中用到的组件都是自己写的，一边参考别人是怎么写组件的，然后实现适用于自己项目的组件。<br>组件的基本格式可以参考Vue的<a href="http://cn.vuejs.org/guide/components.html" target="_blank" rel="external">官方文档</a>。<br><a id="more"></a></p>
+<h3 id="写一个冒泡提示组件"><a href="#写一个冒泡提示组件" class="headerlink" title="写一个冒泡提示组件"></a>写一个冒泡提示组件</h3><h4 id="这个组件的功能"><a href="#这个组件的功能" class="headerlink" title="这个组件的功能"></a>这个组件的功能</h4><p>当用户进行某些操作之后，页面需要给出操作成功，或失败的提示，或错误的提示，或仅仅是提示一些信息，所以命名该组件为<code>vToast</code><br>提示组件用起来大概是这样子的<br><img src="https://lh3.googleusercontent.com/--tu6KCzlG4w/V4oZIOon_lI/AAAAAAAAAAM/OlaqIHFYHGc6vqnrIzwKJh-TBjiMoydxQCLcB/s0/toast.gif" alt="" title="toast.gif"></p>
+<h4 id="html代码"><a href="#html代码" class="headerlink" title="html代码"></a><code>html</code>代码</h4><p>一个Vue文件形式的组件由3个标签组成，<code>Template</code>标签里包含该组件的html代码，<code>style</code>标签包含该组件的样式，<code>script</code>包含该组件的<code>javascript</code>代码。<br>html代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;div class=&quot;v-toast&quot; v-show=&quot;show&quot; transition=&quot;v-toast&quot;&gt;</span><br><span class="line">		&lt;div class=&quot;v-toast-wrap&quot; :class=&quot;[type]&quot;&gt;</span><br><span class="line">			&lt;span class=&quot;v-toast-inner&quot;&gt;</span><br><span class="line">				&lt;i class=&quot;v-toast-ico&quot;&gt;</span><br><span class="line">				&lt;/i&gt;</span><br><span class="line">				&lt;span class=&quot;v-toast-text&quot;&gt;&#123;&#123;text&#125;&#125;&lt;/span&gt;</span><br><span class="line">			&lt;/span&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></p>
+<p>从结构看到，组件动态绑定了一个与<code>type</code>属性关联的<strong>类名</strong>，这是用来标识提示的类型，切换<code>class</code>；<br>同时绑定了<code>text</code>文本，用来显示提示内容，从父组件传入。</p>
+<h4 id="javascript代码"><a href="#javascript代码" class="headerlink" title="javascript代码"></a><code>javascript</code>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">	export default &#123;</span><br><span class="line">		name: &apos;vToast&apos;,</span><br><span class="line">		data()&#123;</span><br><span class="line">			return &#123;</span><br><span class="line">				text: &apos;数据加载中...&apos;,</span><br><span class="line">				type: &apos;warn&apos;,//&apos;ok&apos; &apos;warn&apos; &apos;err&apos; &apos;info&apos;</span><br><span class="line">				timeout: 1500,</span><br><span class="line">				show: false,</span><br><span class="line">				timer: null//储存计时器</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		methods: &#123;</span><br><span class="line">			showTip(&#123;type = &apos;warn&apos;, word, timeout = 1500&#125;)&#123;</span><br><span class="line">				this.text = word</span><br><span class="line">				this.type = type</span><br><span class="line">				this.show = true</span><br><span class="line">				this.timer = window.setTimeout(() =&gt; &#123;</span><br><span class="line">					this.show = false</span><br><span class="line">				&#125;, timeout)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		ready()&#123;</span><br><span class="line">			this.$on(&apos;toast&apos;,(param) =&gt; &#123;</span><br><span class="line">				window.clearTimeout(this.timer)</span><br><span class="line">				this.showTip(param)</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>组件初始化后，<code>data</code>中会有几个属性，其中<code>text</code>绑定文本，<code>type</code>绑定提示类型，<code>show</code>绑定组件的显示和隐藏状态，<code>timeout</code>绑定组件显示提示持续的事件。</p>
+<p>这里还有个<code>timer</code>属性：每次父组件调用该组件，该组件根据传入参数设定类型、文本、持续时间，然后设置<code>show</code>显示，再利用<code>setTimeout</code>方法设置<code>show</code>属性为<code>false</code>使组件隐藏。那么如果当前这次冒泡提示尚未结束，用户又触发了一次冒泡提示，就会出现问题。<br><img src="http://7xnjm0.com1.z0.glb.clouddn.com/toast-bug.gif" alt=""></p>
+<ol>
+<li>触发了一次提示，紧接着触发第二次提示，却因为第一个提示的隐藏时间到了而关闭了；</li>
+<li>第三次提示也提前关闭了。<br>原因是我们每一个提示用的都是同一个Vue实例，所以造成了<code>setTimeout</code>异步关闭错乱的问题。<br>所以每次触发提示时，将<code>setTimeout</code>方法的返回的回调<code>id</code>存到<code>timer</code>上，每一次触发提示前将上一次的回调清空。<h4 id="调用组件"><a href="#调用组件" class="headerlink" title="调用组件"></a>调用组件</h4>我们在组件内定义了触发冒泡提示的方法，然后定义一个自定义监听事件来调用组件的方法。子组件和父组件是通过<strong>dispatch(派发)</strong>和<strong>broadcast(广播)</strong>来达到通信目的的。<br>所以在父组件这样调用：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$broadcast(&apos;toast&apos;, &#123;type: &apos;ok&apos;, word: &apos;添加成功&apos;&#125;)</span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
     </div>
@@ -267,17 +274,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/20/事件冒泡/" rel="next" title="理解事件冒泡">
-                <i class="fa fa-chevron-left"></i> 理解事件冒泡
+              <a href="/2016/03/29/javascript判断变量存在/" rel="next" title="Javascript判断变量存在的问题">
+                <i class="fa fa-chevron-left"></i> Javascript判断变量存在的问题
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/16/编写一个Vue组件/" rel="prev" title="编写一个Vue组件">
-                编写一个Vue组件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -409,7 +412,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#报错了"><span class="nav-number">1.</span> <span class="nav-text">报错了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正确的写法"><span class="nav-number">2.</span> <span class="nav-text">正确的写法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#写法一"><span class="nav-number">2.1.</span> <span class="nav-text">写法一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写法二"><span class="nav-number">2.2.</span> <span class="nav-text">写法二</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写法三"><span class="nav-number">2.3.</span> <span class="nav-text">写法三</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写法四"><span class="nav-number">2.4.</span> <span class="nav-text">写法四</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写一个冒泡提示组件"><span class="nav-number">2.</span> <span class="nav-text">写一个冒泡提示组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#这个组件的功能"><span class="nav-number">2.1.</span> <span class="nav-text">这个组件的功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#html代码"><span class="nav-number">2.2.</span> <span class="nav-text">html代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#javascript代码"><span class="nav-number">2.3.</span> <span class="nav-text">javascript代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调用组件"><span class="nav-number">2.4.</span> <span class="nav-text">调用组件</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
