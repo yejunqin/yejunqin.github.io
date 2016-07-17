@@ -57,39 +57,16 @@
 
 
 
-<meta name="description" content="SVG可缩放矢量图形(Scalable Vector Graphics，SVG)是一种用来描述二维矢量图形的XML标记语言。
-为什么选择SVG来描绘图形？
-SVG 是可伸缩的矢量图形，在浏览器中改变尺寸，其图形质量不会有所损失；
-相比其它位图，SVG图像文件更小，可压缩性更强；
-SVG 可以被记事本等阅读器、搜索引擎访问；
-SVG 图像中的文本是可选的，同时也是可复制的；
-SVG 图像可以与DOM">
+<meta name="description" content="最近的项目终于用上了ES6，感觉真的很好，写起来舒服了很多。目前用到的大部分是被频繁提起的特性，如箭头函数、解构赋值、let, const命令……等等。真正写es6之前，我是在阮一峰的es6入门和Babel的es6教程学习语法的。下面对这段时间使用的es6做一个归纳整理。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SVG学习笔记">
-<meta property="og:url" content="http://yoursite.com/2015/10/19/SVG学习笔记(圆环进度条)/index.html">
+<meta property="og:title" content="ES6学习笔记">
+<meta property="og:url" content="http://yoursite.com/2016/07/20/ES6学习笔记/index.html">
 <meta property="og:site_name" content="风畔的木桩区">
-<meta property="og:description" content="SVG可缩放矢量图形(Scalable Vector Graphics，SVG)是一种用来描述二维矢量图形的XML标记语言。
-为什么选择SVG来描绘图形？
-SVG 是可伸缩的矢量图形，在浏览器中改变尺寸，其图形质量不会有所损失；
-相比其它位图，SVG图像文件更小，可压缩性更强；
-SVG 可以被记事本等阅读器、搜索引擎访问；
-SVG 图像中的文本是可选的，同时也是可复制的；
-SVG 图像可以与DOM">
-<meta property="og:image" content="http://7xnjm0.com1.z0.glb.clouddn.com/circle.jpg">
-<meta property="og:image" content="http://7xnjm0.com1.z0.glb.clouddn.com/circle2.jpg">
-<meta property="og:image" content="http://7xnjm0.com1.z0.glb.clouddn.com/circle.jpg">
-<meta property="og:image" content="http://7xnjm0.com1.z0.glb.clouddn.com/line.jpg">
-<meta property="og:updated_time" content="2016-03-19T17:50:26.372Z">
+<meta property="og:description" content="最近的项目终于用上了ES6，感觉真的很好，写起来舒服了很多。目前用到的大部分是被频繁提起的特性，如箭头函数、解构赋值、let, const命令……等等。真正写es6之前，我是在阮一峰的es6入门和Babel的es6教程学习语法的。下面对这段时间使用的es6做一个归纳整理。">
+<meta property="og:updated_time" content="2016-07-17T16:38:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SVG学习笔记">
-<meta name="twitter:description" content="SVG可缩放矢量图形(Scalable Vector Graphics，SVG)是一种用来描述二维矢量图形的XML标记语言。
-为什么选择SVG来描绘图形？
-SVG 是可伸缩的矢量图形，在浏览器中改变尺寸，其图形质量不会有所损失；
-相比其它位图，SVG图像文件更小，可压缩性更强；
-SVG 可以被记事本等阅读器、搜索引擎访问；
-SVG 图像中的文本是可选的，同时也是可复制的；
-SVG 图像可以与DOM">
-<meta name="twitter:image" content="http://7xnjm0.com1.z0.glb.clouddn.com/circle.jpg">
+<meta name="twitter:title" content="ES6学习笔记">
+<meta name="twitter:description" content="最近的项目终于用上了ES6，感觉真的很好，写起来舒服了很多。目前用到的大部分是被频繁提起的特性，如箭头函数、解构赋值、let, const命令……等等。真正写es6之前，我是在阮一峰的es6入门和Babel的es6教程学习语法的。下面对这段时间使用的es6做一个归纳整理。">
 
 
 
@@ -107,7 +84,7 @@ SVG 图像可以与DOM">
   };
 </script>
 
-  <title> SVG学习笔记 | 风畔的木桩区 </title>
+  <title> ES6学习笔记 | 风畔的木桩区 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -227,7 +204,7 @@ SVG 图像可以与DOM">
             
             
               
-                SVG学习笔记
+                ES6学习笔记
               
             
           </h1>
@@ -239,8 +216,8 @@ SVG 图像可以与DOM">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-19T14:22:33+08:00" content="2015-10-19">
-              2015-10-19
+            <time itemprop="dateCreated" datetime="2016-07-20T00:00:00+08:00" content="2016-07-20">
+              2016-07-20
             </time>
           </span>
 
@@ -266,61 +243,30 @@ SVG 图像可以与DOM">
       
 
       
-        <h3 id="SVG"><a href="#SVG" class="headerlink" title="SVG"></a>SVG</h3><p>可缩放矢量图形(Scalable Vector Graphics，SVG)是一种用来描述二维矢量图形的XML标记语言。</p>
-<h3 id="为什么选择SVG来描绘图形？"><a href="#为什么选择SVG来描绘图形？" class="headerlink" title="为什么选择SVG来描绘图形？"></a>为什么选择SVG来描绘图形？</h3><ul>
-<li>SVG 是可伸缩的矢量图形，在浏览器中改变尺寸，其图形质量不会有所损失；</li>
-<li>相比其它位图，SVG图像文件更小，可压缩性更强；</li>
-<li>SVG 可以被记事本等阅读器、搜索引擎访问；</li>
-<li>SVG 图像中的文本是可选的，同时也是可复制的；</li>
-<li>SVG 图像可以与DOM，CSS和JavaScript交互；</li>
-<li>SVG 可以制作成整体或局部动画。<a id="more"></a>
+        <p>最近的项目终于用上了ES6，感觉真的很好，写起来舒服了很多。目前用到的大部分是被频繁提起的特性，如<strong>箭头函数</strong>、<strong>解构赋值</strong>、<strong>let, const命令</strong>……等等。<br>真正写es6之前，我是在阮一峰的<a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">es6入门</a>和Babel的<a href="https://babeljs.io/docs/learn-es2015/" target="_blank" rel="external">es6教程</a>学习语法的。<br>下面对这段时间使用的es6做一个归纳整理。<br><a id="more"></a></p>
+<h3 id="let-const-命令"><a href="#let-const-命令" class="headerlink" title="let, const 命令"></a>let, const 命令</h3><h4 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h4><p>在es5里，我们用<code>var</code>命令在声明变量，但var命令的作用域是函数作用域，也就是说通过var声明的变量在声明它的函数内都是有效的。<br>es6新增了<code>let</code>命令，不同的是，声明的变量，只在声明它的<strong>代码块</strong>内有效，称之为<strong>块级作用域</strong>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">	<span class="keyword">let</span> a = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">var</span> b = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">a <span class="comment">//ReferenceError: a is not defined(…)</span></span><br><span class="line">b <span class="comment">//1</span></span><br></pre></td></tr></table></figure></p>
+<p>在书上、或面试题中，肯定见过这样的题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var foo = []</span><br><span class="line">for(var i = 0; i &lt; 10; i++)&#123;</span><br><span class="line">	foo[i] = function()&#123;</span><br><span class="line">		console.log(i)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">foo[3]() // 10</span><br></pre></td></tr></table></figure></p>
+<p>这是函数作用域的锅，因为for循环里面的i都是同一个变量，当循环结束后，i的值是10。<br>当然，可以用闭包解决这个问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var foo = []</span><br><span class="line">for(var i = 0; i &lt; 10; i++)&#123;</span><br><span class="line">	foo[i] = function(i)&#123;</span><br><span class="line">		return function()&#123;</span><br><span class="line">			console.log(i)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;(i)</span><br><span class="line">&#125;</span><br><span class="line">foo[3]() // 3</span><br></pre></td></tr></table></figure></p>
+<p>在es6里面，基本上就是用let命令代替var<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var foo = []</span><br><span class="line">for(let i = 0; i &lt; 10; i++)&#123;</span><br><span class="line">	foo[i] = function()&#123;</span><br><span class="line">		console.log(i)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">foo[3]() // 3</span><br></pre></td></tr></table></figure></p>
+<p>let声明的变量只在当次循环有效，因此每次循环声明的都是新的变量</p>
+<h4 id="没有变量提升"><a href="#没有变量提升" class="headerlink" title="没有变量提升"></a>没有变量提升</h4><p>let不像var那样存在变量提升，因此以下代码会报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">console.log(a) // undefined</span><br><span class="line">console.log(b) // ReferenceError: b is not defined</span><br><span class="line">var a</span><br><span class="line">let b</span><br></pre></td></tr></table></figure></p>
+<p>所以要使用let变量必须先声明，否则会抛出错误</p>
+<h4 id="const命令"><a href="#const命令" class="headerlink" title="const命令"></a>const命令</h4><p><code>const</code>用于声明一个只读的常量，一旦声明，常量的值不能改变。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const abc = 0</span><br><span class="line">abc = 1 //TypeError: Assignment to constant variable</span><br></pre></td></tr></table></figure></p>
+<p>并且const声明变量时必须同时赋一个初始值，不能之后再给初始值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const abc</span><br><span class="line">//SyntaxError: Missing initializer in const declaration</span><br></pre></td></tr></table></figure></p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ol>
+<li>用let命令替代var命令来声明变量</li>
+<li>用const命令声明常量</li>
+<li>尽量使用const声明函数<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3>使用函数时，可以用箭头函数这种简写的形式<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">arrs.forEach(val =&gt; val + 1)</span><br><span class="line"></span><br><span class="line">//es5</span><br><span class="line">arrs.forEach(function(val)&#123;</span><br><span class="line">	return val + 1</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">var add = (a, b) =&gt; &#123;</span><br><span class="line">	return a + b</span><br><span class="line">&#125;</span><br><span class="line">//es5</span><br><span class="line">var add = function(a, b)&#123;</span><br><span class="line">	return a + b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<h3 id="浏览器兼容性"><a href="#浏览器兼容性" class="headerlink" title="浏览器兼容性"></a>浏览器兼容性</h3><table>
-<thead>
-<tr>
-<th>功能</th>
-<th>Chrome</th>
-<th>Firefox(Gecko)</th>
-<th>Internet Explorer</th>
-<th>Opera</th>
-<th>Safari</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>基本支持</td>
-<td>1.0</td>
-<td>1.5(1.8)</td>
-<td>9.0</td>
-<td>8.0</td>
-<td>3.0.4</td>
-</tr>
-</tbody>
-</table>
-<p>也就是说，SVG在现代浏览器及IE9.0+版本都能得到支持，如果不需要对低版本IE兼容,使用SVG是个很好的解决方案。<br>当然，如果需要兼容旧版本IE，又想用SVG，可以使用Polyfill来解决(遇到html5浏览器直接显示SVG，遇到旧版本浏览器(IE6,7,8)则改用Flash解析SVG图像)。</p>
-<h3 id="SVG练习-用SVG做一个圆环进度图"><a href="#SVG练习-用SVG做一个圆环进度图" class="headerlink" title="[SVG练习]用SVG做一个圆环进度图"></a>[SVG练习]用SVG做一个圆环进度图</h3><p>假如要制作这样一个<br><img src="http://7xnjm0.com1.z0.glb.clouddn.com/circle.jpg" alt="enter image description here"><br>SVG代码如下:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg width=<span class="string">"440"</span> height=<span class="string">"440"</span>&gt;</span><br><span class="line">    &lt;circle cx="220" cy="220" r="170" stroke-width="50" stroke="#D1D3D7" fill="none"&gt;&lt;/circle&gt;</span><br><span class="line">    &lt;circle cx=<span class="string">"220"</span> cy=<span class="string">"220"</span> r=<span class="string">"170"</span> stroke-width=<span class="string">"50"</span> stroke=<span class="string">"#00A5E0"</span> fill=<span class="string">"none"</span> stroke-dasharray=<span class="string">"200 1069"</span>&gt;&lt;/circle&gt;</span><br><span class="line">&lt;<span class="regexp">/svg&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p><code>circle</code>是SVG的一个基本形状(还有直线<code>line</code>, 椭圆<code>ellipse</code>, 折线<code>polyline</code>, 多边形<code>polygon</code> 等等…);</p>
-<p>SVG内的元素能定义属性, 用来描述形状.</p>
-<ul>
-<li><code>cx</code>：圆的中点的<strong>x坐标</strong>;</li>
-<li><code>cy</code> : 圆的中点的<strong>y坐标</strong>;</li>
-<li><code>r</code> : 圆的<strong>半径</strong>;</li>
-<li><code>stroke</code> : 定义<strong>颜色</strong>, 线/文本/元素轮廓颜色;</li>
-<li><code>skroke-width</code> : 定义<strong>厚度</strong>, 线/文本/元素轮廓厚度;</li>
-<li><code>stroke-dasharray</code> : 表示描边为虚线, 两个值, 第一个值表示虚线的宽度, 第二个值表示虚线之间的间距;</li>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute" target="_blank" rel="external">更多属性参考</a></li>
-</ul>
-<p>实现圆环进度的重点是, 我们用两个圆环, 表示进度的圆环覆盖表示100%的圆环, 同时表示进度圆环的轮廓用虚线来表示, 虚线的长度设为进度的百分比, 再使虚线的间隔大于等于圆环的长度(实际上就是利用虚线的第一段来覆盖原始圆环).<br><img src="http://7xnjm0.com1.z0.glb.clouddn.com/circle2.jpg" alt="enter image description here"></p>
-<p>可以看到, 现在这个圆环有点问题, 就是它的起始位置不是由0°开始,而是由90°开始.那就就需要用到<code>transform</code>这个属性了.</p>
-<p>利用<code>transform</code>可以对图形进行图像<strong>变换, 旋转, 缩放, 移动</strong>, 和<strong>倾斜</strong>. 关于更多<code>transform</code>属性的了解, 可参考这篇文章<a href="http://www.w3cplus.com/html5/svg-transformations.html" target="_blank" rel="external">理解SVG坐标系统和变换: transform属性</a>.</p>
-<p>ok, 加上<code>transform</code>属性,大功告成,代码如下:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg width=<span class="string">"440"</span> height=<span class="string">"440"</span>&gt;</span><br><span class="line">    &lt;circle cx="220" cy="220" r="170" stroke-width="50" stroke="#D1D3D7" fill="none"&gt;&lt;/circle&gt;</span><br><span class="line">    &lt;circle cx=<span class="string">"220"</span> cy=<span class="string">"220"</span> r=<span class="string">"170"</span> stroke-width=<span class="string">"50"</span> stroke=<span class="string">"#00A5E0"</span> fill=<span class="string">"none"</span> transform=<span class="string">"rotate(-90 220 220)"</span> stroke-dasharray=<span class="string">"200 1069"</span>&gt;&lt;/circle&gt;</span><br><span class="line">&lt;<span class="regexp">/svg&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xnjm0.com1.z0.glb.clouddn.com/circle.jpg" alt="enter image description here"></p>
-<p><a href="http://somedemo.github.io/SVG-circle-progress-bar/" target="_blank" rel="external">demo地址</a></p>
-<h3 id="再做一个-用SVG做一个直线进度图"><a href="#再做一个-用SVG做一个直线进度图" class="headerlink" title="[再做一个]用SVG做一个直线进度图"></a>[再做一个]用SVG做一个直线进度图</h3><p>有了前一个例子的经验,换成直线也很简单. 代码如下:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg width=<span class="string">"440"</span> height=<span class="string">"200"</span> style=<span class="string">"margin-left:100px;"</span>&gt;</span><br><span class="line">    &lt;line x1="0" y1="0" x2="440" y2="0" stroke-width="50" stroke="#d1d3d7" fill="none"&gt;&lt;/line&gt;</span><br><span class="line">    &lt;line x1=<span class="string">"0"</span> y1=<span class="string">"0"</span> x2=<span class="string">"440"</span> y2=<span class="string">"0"</span> stroke-width=<span class="string">"50"</span> stroke=<span class="string">"#00a5e0"</span> fill=<span class="string">"none"</span> stroke-dasharray=<span class="string">"0 440"</span>&gt;</span><br><span class="line">&lt;/svg&gt;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xnjm0.com1.z0.glb.clouddn.com/line.jpg" alt="enter image description here"></p>
-<p>原理是一样的.<br><a href="http://somedemo.github.io/SVG-circle-progress-bar/" target="_blank" rel="external">demo地址</a></p>
-<hr>
+</ol>
+<p>需注意几点：</p>
+<ol>
+<li>传入参数只有一个时，可以省略圆括号，没有参数或多于一个时，需要圆括号；</li>
+<li>箭头函数接受一个表达式或语句块，函数内容是表达式时，不需要花括号，并且函数会直接返回表达式的值；内容是语句块时，需要花括号；<h4 id="箭头函数默认绑定外部作用域"><a href="#箭头函数默认绑定外部作用域" class="headerlink" title="箭头函数默认绑定外部作用域"></a><strong>箭头函数默认绑定外部作用域</strong></h4>以前需要将this传入调用的方法内，一般都这么写<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var self = this</span><br><span class="line">foo(arg, function()&#123;</span><br><span class="line">	self...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>箭头函数内将作用域绑定至包含它的函数的作用域，即this值的指向与外部是一致的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var self = this</span><br><span class="line">foo(arg, val =&gt; &#123;</span><br><span class="line">	this === self // true</span><br><span class="line">	this...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>因此再也不需要写<code>var  self = this</code>这种丑陋的代码了</p>
 
       
     </div>
@@ -338,13 +284,13 @@ SVG 图像可以与DOM">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/07/16/编写一个Vue组件/" rel="next" title="编写一个Vue组件">
+                <i class="fa fa-chevron-left"></i> 编写一个Vue组件
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/10/22/snippet-CSS/" rel="prev" title="snippet-CSS">
-                snippet-CSS <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -476,7 +422,7 @@ SVG 图像可以与DOM">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SVG"><span class="nav-number">1.</span> <span class="nav-text">SVG</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么选择SVG来描绘图形？"><span class="nav-number">2.</span> <span class="nav-text">为什么选择SVG来描绘图形？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器兼容性"><span class="nav-number">3.</span> <span class="nav-text">浏览器兼容性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SVG练习-用SVG做一个圆环进度图"><span class="nav-number">4.</span> <span class="nav-text">[SVG练习]用SVG做一个圆环进度图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再做一个-用SVG做一个直线进度图"><span class="nav-number">5.</span> <span class="nav-text">[再做一个]用SVG做一个直线进度图</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#let-const-命令"><span class="nav-number">1.</span> <span class="nav-text">let, const 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#块级作用域"><span class="nav-number">1.1.</span> <span class="nav-text">块级作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#没有变量提升"><span class="nav-number">1.2.</span> <span class="nav-text">没有变量提升</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#const命令"><span class="nav-number">1.3.</span> <span class="nav-text">const命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小结"><span class="nav-number">1.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#箭头函数"><span class="nav-number">2.</span> <span class="nav-text">箭头函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#箭头函数默认绑定外部作用域"><span class="nav-number">2.1.</span> <span class="nav-text">箭头函数默认绑定外部作用域</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
