@@ -206,6 +206,111 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/25/Vue表格组件开发(上)/" itemprop="url">
+                  固定表头、排序、冻结列、隐藏列的Table组件
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-25T00:00:00+08:00" content="2016-07-25">
+              2016-07-25
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>最近开发的项目对于表格的使用要求很高，产品要求要有固定表头、能排序、左右滚动时能冻结某些列、隐藏某些列、滚动加载（也就是不要分页按钮）、拖拽改变宽度这些功能（我了个去）。项目是用Vue+webpack写的，基于Vue的有这些功能的组件暂时还没找到，所以就自己写一个了。<br>自己也基本上是一边开发业务模块，一边开发组件…到现在表格组件已经写的七七八八了，下面逐个整理一下自己是怎么实现的。</p>
+<h3 id="滚动加载"><a href="#滚动加载" class="headerlink" title="滚动加载"></a>滚动加载</h3><p>要点：</p>
+<ol>
+<li>监听<code>scroll</code>事件，计算是否滚动到底部；</li>
+<li>节流函数解决短时间内多次触发<code>scroll</code>事件的问题</li>
+</ol>
+<p>其实本质上跟后台请求时还是按照分页来的(滚动加载一次就请求下一页的数据)。</p>
+<h4 id="计算是否到了底部"><a href="#计算是否到了底部" class="headerlink" title="计算是否到了底部"></a>计算是否到了底部</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">scroll(e)&#123;</span><br><span class="line">  throttle(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> target = e.target</span><br><span class="line">    <span class="comment">//计算是否滚动到底并且不是横向滚动</span></span><br><span class="line">    <span class="keyword">const</span> &#123;clientHeight: height, scrollHeight, scrollTop, scrollLeft&#125; = target</span><br><span class="line">    <span class="keyword">if</span>(height + <span class="built_in">Math</span>.ceil(scrollTop) &gt;= scrollHeight)&#123;</span><br><span class="line">      <span class="keyword">this</span>.loadData(e)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="number">100</span>, <span class="keyword">this</span>) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>clientHeight</code>：元素的高度</li>
+<li><code>scrollTop</code>：设置或者获取一个元素距离他容器顶部的像素距离，通俗点讲，就是获取或设置元素已经滚动了的距离（这里是垂直距离，相应的<code>scrollLeft</code>指已经滚动了的水平距离）</li>
+<li><code>scrollHeight</code>：这是个只读属性，返回一个元素的<strong>完整高度</strong></li>
+</ol>
+<p>如下图：<br><img src="https://developer.mozilla.org/@api/deki/files/840/=ScrollHeight.png" alt="scrollHeight"><br>假如一个元素是滚动的，scrollHeight即为它的全部高度（但不包含margin）<br>所以只要计算<strong>容器高度 + 已经滚动的高度 &gt;= 容器的全部高度</strong>，满足表示到了底部。用<code>Math.ceil</code>对<code>scrollTop</code>向上去整避免因为小数位的误差导致不满足条件</p>
+<h4 id="节流函数"><a href="#节流函数" class="headerlink" title="节流函数"></a>节流函数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">/**</span><br><span class="line">   * 节流函数，用于短时间内连续触发大量dom计算</span><br><span class="line">   * @param  &#123;[Function]&#125; method  [需要调用的函数]</span><br><span class="line">   * @param  &#123;[Number]&#125; timeout [定时器时长, 毫秒]</span><br><span class="line">   * @param  &#123;[Object]&#125; context [指定函数的上下文，如果没有，则上下文是全局作用域]</span><br><span class="line">   */</span></span><br><span class="line"><span class="keyword">var</span> throttle = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> timeoutId</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">method, timeout = 100, context = window</span>)</span>&#123;</span><br><span class="line">    clearTimeout(timeoutId)</span><br><span class="line">    timeoutId = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      method.call(context)</span><br><span class="line">    &#125;, timeout)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<p>通过<strong>函数节流</strong>可以避免不必要的dom计算</p>
+<h3 id="固定表头"><a href="#固定表头" class="headerlink" title="固定表头"></a>固定表头</h3><p>关于如何在滚动表格时固定表头，就像这样<br><img src="http://7xnjm0.com1.z0.glb.clouddn.com/frozen-head.gif" alt="frozenHead"><br>以前做过一个项目也有这种需求，当时采用的策略是：<br>向下滚动表格时，把<code>thead</code>改为绝对定位，固定在表格最上方。不过当时做完后体验不是很好（大概就是改变定位时会闪一下）<br>现在采用的策略是：<strong>渲染两个<code>table</code></strong>，表头一个，内容一个，这样滚动内容表格时，自然不会影响到表头。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/20/ES6学习笔记/" itemprop="url">
                   ES6学习笔记
                 </a>
@@ -1009,107 +1114,13 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/19/SVG学习笔记(圆环进度条)/" itemprop="url">
-                  SVG学习笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-19T14:22:33+08:00" content="2015-10-19">
-              2015-10-19
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="SVG"><a href="#SVG" class="headerlink" title="SVG"></a>SVG</h3><p>可缩放矢量图形(Scalable Vector Graphics，SVG)是一种用来描述二维矢量图形的XML标记语言。</p>
-<h3 id="为什么选择SVG来描绘图形？"><a href="#为什么选择SVG来描绘图形？" class="headerlink" title="为什么选择SVG来描绘图形？"></a>为什么选择SVG来描绘图形？</h3><ul>
-<li>SVG 是可伸缩的矢量图形，在浏览器中改变尺寸，其图形质量不会有所损失；</li>
-<li>相比其它位图，SVG图像文件更小，可压缩性更强；</li>
-<li>SVG 可以被记事本等阅读器、搜索引擎访问；</li>
-<li>SVG 图像中的文本是可选的，同时也是可复制的；</li>
-<li>SVG 图像可以与DOM，CSS和JavaScript交互；</li>
-<li>SVG 可以制作成整体或局部动画。
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/19/SVG学习笔记(圆环进度条)/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1148,7 +1159,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
